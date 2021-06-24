@@ -315,7 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680c955c4a825114d9b42c63cdca2107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 300
+  defaultSpeed: 150
+  runningSpeed: 400
+  upSpeed: 5
   mouseSensitivity: 50
   rotationOnAxisZForce: 100
 --- !u!1 &963194225
