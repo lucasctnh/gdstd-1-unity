@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
 	[Header("Player Movement")]
 	public float defaultSpeed = 200f;
 	public float runningSpeed = 400f;
@@ -13,62 +12,59 @@ public class PlayerController : MonoBehaviour
 	public float mouseSensitivity = 100f;
 
 	[Header("In-Script Variables")]
-	private Rigidbody dragonRb;
-	private Animator animator;
+	private Rigidbody _dragonRb;
+	private Animator _anim;
+	private InputReader _inputReader;
 
-	private float currentSpeed;
-	private float rotationOnAxisX = 0f;
-	private float rotationOnAxisY = 0f;
-	private float rotationOnAxisZ = 0f;
-	[SerializeField] private const float rotationOnAxisZForce = 50f;
+	private float _currentSpeed;
+	private float _rotationOnAxisX, _rotationOnAxisY, _rotationOnAxisZ;
+	[SerializeField] private const float _rotationOnAxisZForce = 50f;
 	private const float lerpFactor = 0.5f;
 
+	private void Awake() {
+		_dragonRb = GetComponent<Rigidbody>();
+		_anim = GetComponent<Animator>();
+		_inputReader = GetComponent<InputReader>();
+	}
+
 	private void Start() {
-		dragonRb = GetComponent<Rigidbody>();
-		animator = GetComponent<Animator>();
+		Cursor.lockState = CursorLockMode.Locked;
 	}
 
 	private void FixedUpdate() {
-		// -------------- Player movement ----------------
+		bool isRunning = _inputReader.ReadIfRunning();
+		_currentSpeed = isRunning ? runningSpeed : defaultSpeed;
+		_anim.SetFloat("Speed Multiplier", isRunning ? 2f : 1f);
 
-		if(Input.GetKey(KeyCode.LeftShift)) {
-			currentSpeed = runningSpeed;
-			animator.SetFloat("Run Multiplier", 2f);
-		}
-		else {
-			currentSpeed = defaultSpeed;
-			animator.SetFloat("Run Multiplier", 1f);
-		}
+		MovePlayer(_inputReader.ReadVerticalInput(transform), _currentSpeed);
+		_anim.SetFloat("Speed", _inputReader.VerticalInput * _currentSpeed);
 
-		float zInput = Input.GetAxis("Vertical") * Time.deltaTime;
+		MovePlayer(_inputReader.ReadUpDownInput(), upSpeed);
 
-		dragonRb.AddForce(transform.forward * zInput * currentSpeed, ForceMode.VelocityChange);
-		animator.SetFloat("Speed", zInput * currentSpeed);
+		// Z axis rotation is driven by A and D keys
+		_rotationOnAxisZ -= _inputReader.ReadHorizontalInput(_rotationOnAxisZForce);
+		_rotationOnAxisZ = Mathf.Clamp(_rotationOnAxisZ, -60f, 60f);
 
-		if(Input.GetKey(KeyCode.Space))
-			dragonRb.AddForce(Vector3.up * upSpeed, ForceMode.VelocityChange);
-		if(Input.GetKey(KeyCode.LeftControl))
-			dragonRb.AddForce(Vector3.up * -1 * upSpeed, ForceMode.VelocityChange);
+		_rotationOnAxisX -= _inputReader.MouseY; // += is inverted
+		_rotationOnAxisY += _inputReader.MouseX;
 
-		float xInput = Input.GetAxis("Horizontal") * Time.deltaTime;
+		Vector3 rotation = new Vector3(_rotationOnAxisX, _rotationOnAxisY, _rotationOnAxisZ);
+		LerpRotation(rotation); // Lerping to 0 so it wont be a continuous rotation
 
- 		rotationOnAxisZ -= xInput * rotationOnAxisZForce; // Z axis rotation is driven by A and D keys
-		rotationOnAxisZ = Mathf.Clamp(rotationOnAxisZ, -60f, 60f);
+		RotatePlayer(rotation);
+	}
 
-		// -------------- Camera movement ----------------
-		Cursor.lockState = CursorLockMode.Locked;
+	private void MovePlayer(Vector3 force, float speed) {
+		_dragonRb.AddForce(force * speed, ForceMode.VelocityChange);
+	}
 
-		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+	private void LerpRotation(Vector3 rotation) {
+		_rotationOnAxisX = Mathf.Lerp(rotation.x, 0f, lerpFactor);
+		_rotationOnAxisY = Mathf.Lerp(rotation.y, 0f, lerpFactor);
+		_rotationOnAxisZ = Mathf.Lerp(rotation.z, 0f, lerpFactor);
+	}
 
-		rotationOnAxisX -= mouseY; // += is inverted
-		rotationOnAxisY += mouseX;
-
-		// Lerping to 0 so it wont be a continuous rotation
-		rotationOnAxisX = Mathf.Lerp(rotationOnAxisX, 0f, lerpFactor);
-		rotationOnAxisY = Mathf.Lerp(rotationOnAxisY, 0f, lerpFactor);
-		rotationOnAxisZ = Mathf.Lerp(rotationOnAxisZ, 0f, lerpFactor);
-
-		transform.Rotate(new Vector3(rotationOnAxisX, rotationOnAxisY, rotationOnAxisZ), Space.Self);
+	private void RotatePlayer(Vector3 rotation) {
+		transform.Rotate(rotation, Space.Self);
 	}
 }

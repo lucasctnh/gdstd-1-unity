@@ -319,7 +319,18 @@ MonoBehaviour:
   runningSpeed: 400
   upSpeed: 5
   mouseSensitivity: 50
-  rotationOnAxisZForce: 100
+--- !u!114 &712595567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712595564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50488924557d1dd4e9fdad8c44b653d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +498,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 0, z: 1000}
+  m_Size: {x: 800, y: 0, z: 800}
   m_Center: {x: 0, y: 150, z: 0}
 --- !u!4 &1276959592
 Transform:
@@ -514,7 +525,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 300, z: 0}
+  m_Size: {x: 800, y: 300, z: 0}
   m_Center: {x: 0, y: 0, z: -400}
 --- !u!65 &1276959594
 BoxCollider:
@@ -527,7 +538,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 300, z: 0}
+  m_Size: {x: 800, y: 300, z: 0}
   m_Center: {x: 0, y: 0, z: 400}
 --- !u!65 &1276959595
 BoxCollider:
@@ -540,7 +551,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 300, z: 1000}
+  m_Size: {x: 0, y: 300, z: 800}
   m_Center: {x: -400, y: 0, z: 0}
 --- !u!65 &1276959596
 BoxCollider:
@@ -553,7 +564,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0, y: 300, z: 1000}
+  m_Size: {x: 0, y: 300, z: 800}
   m_Center: {x: 400, y: 0, z: 0}
 --- !u!1 &1979155455
 GameObject:
