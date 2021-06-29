@@ -36,4 +36,15 @@ public class InputReader : MonoBehaviour {
 
 		return Vector3.up * direction;
 	}
+
+	internal bool ReadIfReadyToAttack() {
+		bool isReadyToAttack;
+
+		if (Input.GetMouseButtonDown(0))
+			isReadyToAttack = true;
+		else
+			isReadyToAttack = false;
+
+		return isReadyToAttack;
+	}
 }
