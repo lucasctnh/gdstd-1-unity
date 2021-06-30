@@ -27,14 +27,14 @@ public class InputReader : MonoBehaviour {
 	}
 
 	internal Vector3 ReadUpDownInput() {
-		int direction = 0;
+		float force = 0;
 
 		if (Input.GetKey(KeyCode.Space))
-			direction = 1;
+			force = 1 * Time.deltaTime;
 		else if (Input.GetKey(KeyCode.LeftControl))
-			direction = -1;
+			force = -1 * Time.deltaTime;
 
-		return Vector3.up * direction;
+		return Vector3.up * force;
 	}
 
 	internal bool ReadIfReadyToAttack() {

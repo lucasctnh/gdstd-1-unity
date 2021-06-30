@@ -3221,7 +3221,7 @@ MonoBehaviour:
   defaultSpeed: 150
   runningSpeed: 400
   upSpeed: 50
-  mouseSensitivity: 50
+  mouseSensitivity: 100
   fireBreath: {fileID: 6875481469708253181}
   fireBreathAnimationDelay: 0.5
   fireBreathDuration: 1.8

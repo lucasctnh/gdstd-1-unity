@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7416536dbe0334cfd888dd1beb75a9fb, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cdbb40e11399e4a17882ada20a1b896a, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.38148043, g: 0.46817917, b: 0.6131963, a: 1}
+  m_IndirectSpecularColor: {r: 0.3844336, g: 0.47180575, b: 0.6176565, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: Sun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   m_LocalRotation: {x: 0.90216255, y: -0.1865432, z: 0.0641817, w: 0.38364702}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: -71, y: 375, z: 20197}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -229,7 +229,8 @@ GameObject:
   - component: {fileID: 838114637}
   - component: {fileID: 838114636}
   - component: {fileID: 838114640}
-  m_Layer: 10
+  - component: {fileID: 838114641}
+  m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -347,6 +348,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothSpeed: 0.125
   offset: {x: 0, y: 530, z: -2702}
+--- !u!124 &838114641
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838114635}
+  m_Enabled: 1
 --- !u!1 &894041737
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +511,7 @@ GameObject:
   - component: {fileID: 1276959594}
   - component: {fileID: 1276959593}
   - component: {fileID: 1276959591}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
