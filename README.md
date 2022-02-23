@@ -1,4 +1,4 @@
-# GDSTD-Prototype-1
+# Game Dev Study: Prototype 1
 This was a small project I've made to test and study Unity's URP and TPS controlling.
 
 ![Prototype Image](https://github.com/lcscout/GDSTD-Prototype-1/blob/main/gdstd1.png "Prototype Image")
